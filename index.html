@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Encuesta Nacional CI y MMC</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Fuente Roboto -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- URL de Apps Script (reemplaza esto por la tuya) -->
+  <script>
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx6Mtle3QoMM_6MycYCnM907Jvjr7aZI8oAWba3tXs7uzwi5v6YWlUMub8q8HIbOFk/exec';
+  </script>
+
+  <!-- JS -->
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <div class="page">
+
+    <!-- ENCABEZADO PRINCIPAL -->
+    <header class="hero">
+      <div class="hero-inner">
+        <h1>Encuesta Nacional sobre Adopción de la Construcción Industrializada (CI) a través de Métodos Modernos de Construcción (MMC)</h1>
+      </div>
+    </header>
+
+    <!-- AVANCE DE ENCUESTA (aparece al iniciar) -->
+    <section id="progressShell" class="progress-shell hidden">
+      <div class="progress-inner">
+        <div class="progress-top">
+          <div class="progress-title">Avance de la encuesta</div>
+          <div id="stepCounter" class="progress-counter">Paso 1 de 7</div>
+        </div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="progressFill"></div>
+        </div>
+        <div id="progressLabel" class="progress-label">Conceptos clave</div>
+        <div class="progress-steps">
+          <div class="prog-step active" data-step-chip="1">1. Conceptos clave</div>
+          <div class="prog-step" data-step-chip="2">2. Caracterización</div>
+          <div class="prog-step" data-step-chip="3">3. Estrategia CI</div>
+          <div class="prog-step" data-step-chip="4">4. Conocimiento MMC</div>
+          <div class="prog-step" data-step-chip="5">5. Beneficios y barreras</div>
+          <div class="prog-step" data-step-chip="6">6. Proyección</div>
+          <div class="prog-step" data-step-chip="7">7. Privacidad</div>
+        </div>
+      </div>
+    </section>
+
+    <main>
+
+      <!-- PANTALLA 0: BIENVENIDA -->
+      <section id="welcomeScreen" class="card welcome-card">
+        <h2>Bienvenida</h2>
+        <p class="welcome-text">
+          Este sondeo busca averiguar conocer cómo las empresas del sector están avanzando hacia la Construcción Industrializada (CI),
+          entendida como una manera de construir planificada, repetible y controlada, con o sin prefabricados, a lo largo del ciclo de vida del proyecto.
+        </p>
+        <p class="welcome-text">
+          <strong>Duración estimada:</strong> 12 minutos.<br>
+          <strong>Confidencialidad:</strong> Respuestas anónimas y analizadas de forma agregada.
+        </p>
+
+        <button id="startSurveyBtn" class="btn btn-primary">
+          Iniciar encuesta
+        </button>
+      </section>
+
+      <!-- FORMULARIO (PASOS 1–7) -->
+      <form id="surveyForm" class="hidden" method="POST" target="hidden_iframe" novalidate>
+        <!-- PASO 1: Conceptualización -->
+        <section class="card step" data-step="1">
+          <div class="card-header">
+            <h2>Sección 1: Conceptualización</h2>
+            <p class="card-desc">
+              En esta sección se presentan las definiciones de Construcción Industrializada (CI), Métodos Modernos de Construcción (MMC) y sus habilitadores clave.
+            </p>
+          </div>
+
+          <div class="question">
+            <div class="question-label">¿Qué es la Construcción Industrializada?</div>
+            <div class="question-help">
+Es una metodología de construcción basada en procesos planificados, repetibles y controlados, que aplican principios de industria manufacturera a la construcción. Involucra tanto soluciones off-site como on-site, siempre que se trabaje de forma sistemática y orientada a procesos a lo largo del ciclo de vida del proyecto.
+            </div>
+          </div>
+
+          <div class="question">
+            <div class="question-label">¿Qué son los Métodos Modernos de Construcción?</div>
+            <div class="question-help">
+Métodos Modernos de Construcción (MMC) son distintas formas o estrategias para aplicar la construcción industrializada de forma efectiva, que permiten mejorar la productividad y sostenibilidad de los proyectos.
+
+Se dividen en 7 categorías, que agrupan diferentes tipos de soluciones constructivas aplicables en construcción industrializada. Estas categorías no son excluyentes ni jerárquicas, y pueden combinarse entre sí o con sistemas tradicionales, según las necesidades del proyecto.
+            </div>
+            <div class="question-help">
+MMC 1: Componentes refabricados estructurales 3D, ya sean módulos o viviendas prefabricadas completas.  
+MMC 2: Componentes prefabricados estructurales 2D, ya sea muros, losas o estructuras de techumbres.  
+MMC3: Componentes prefabricados estructurales 1D, como vigas, pilares o escaleras.  
+MMC4: Componentes aditivos, principalmente se destaca la impresión 3D.  
+MMC5: Prefabricados no estructurales en cualquier geometría, como por ejemplo pods de baños, fachadas prefabricadas, salas de calderas, etc.  
+MMC 6: Partes y piezas sustitutivas que adelantan faenas en obra y disminuyen los recursos utilizados en los procesos constructivos como acero predoblado/precortado, moldajes monolíticos, hormigones con tecnología, productos de terminaciones eficientes, entre otros.  
+MMC 7: Tecnologías sustitutivas en sitio como uso de drones, exoesqueletos, realidad virtual, softwares, etc.
+            </div>
+          </div>
+
+          <div class="question">
+            <div class="question-label">¿Cuáles son sus habilitadores clave?</div>
+            <div class="question-help">
+Los habilitadores de la construcción industrializada son metodologías y filosofías que maximizan la eficiencia, escalabilidad y éxito de las soluciones de Métodos Modernos de Construcción (MMC).
+Se destaca Metodología BIM (Better Information Management), Diseño para la manufactura y ensamblaje (DFMA) y filosofía LEAN CONSTRUCTION. Para fortalecer estas metodologías se debe considerar integración temprana y colaboración, estandarización y medición y mejora continua.
+Estos habilitadores te permiten capturar todo el potencial y el valor de los MMC.
+            </div>
+          </div>
+
+          <div class="question">
+            <label class="option">
+              <input type="checkbox"
+                     name="Declaro haber leído y estar en conocimiento sobre los conceptos de industrialización y Métodos Modernos de Construcción"
+                     value="Marcado"
+                     required />
+              <span>Declaro haber leído y estar en conocimiento sobre los conceptos de industrialización y Métodos Modernos de Construcción</span>
+            </label>
+          </div>
+
+          <div class="form-nav">
+            <span class="error-global"></span>
+            <button type="button" class="btn btn-primary" data-next>
+              Siguiente sección
+            </button>
+          </div>
+        </section>
+
+        <!-- PASO 2: Caracterización de la empresa -->
+        <section class="card step" data-step="2">
+          <div class="card-header">
+            <h2>Sección 2: Caracterización de la empresa</h2>
+            <p class="card-desc">
+              Esta sección identifica el perfil básico de la empresa para analizar los resultados por tipo de organización, tamaño y territorio.
+            </p>
+          </div>
+
+          <div class="question">
+            <div class="question-label">1. ¿Qué tipo de empresa representa usted?</div>
+            <div class="options-group">
+              <label class="option">
+                <input type="radio" name="tipo_empresa" value="Constructora" required />
+                <span>Constructora</span>
+              </label>
+              <label class="option">
+                <input type="radio" name="tipo_empresa" value="Inmobiliaria" />
+                <span>Inmobiliaria</span>
+              </label>
+              <label class="option">
+                <input type="radio" name="tipo_empresa" value="Proveedora de soluciones o materiales industrializados" />
+                <span>Proveedora de soluciones o materiales industrializados</span>
+              </label>
+              <label class="option">
+                <input type="radio" name="tipo_empresa" value="Otro (especifique)" />
+                <span>Otro (especifique)</span>
+              </label>
+              <input type="text" name="tipo_empresa_otro" placeholder="Si marcó Otro, especifique">
+            </div>
+          </div>
+
+          <div class="question">
+            <div class="question-label">2. ¿Cuántos trabajadores tiene su empresa actualmente?</div>
+            <div class="question-help">(Considere el promedio anual, incluyendo personal de obra y oficina).</div>
+            <div class="options-group">
+              <label class="option">
+                <input type="radio" name="tamano_empresa" value="Microempresa (menos de 10 personas)" required />
+                <span>Microempresa (menos de 10 personas)</span>
+              </label>
+              <label class="option">
+                <input type="radio" name="tamano_empresa" value="Pequeña (10 a 49 personas)" />
+                <span>Pequeña (10 a 49 personas)</span>
+              </label>
+              <label class="option">
+                <input type="radio" name="tamano_empresa" value="Mediana (50 a 199 personas)" />
+                <span>Mediana (50 a 199 personas)</span>
+              </label>
+              <label class="option">
+                <input type="radio" name="tamano_empresa" value="Grande (200 o más personas)" />
+                <span>Grande (200 o más personas)</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="question">
+            <div class="question-label">3. ¿En qué macrozonas del país se desarrollan proyectos actualmente? (Seleccione todas las que correspondan)</div>
+            <div class="options-group">
+              <label class="option">
+                <input type="checkbox" name="macrozona" value="Macrozona Norte (Arica, Tarapacá, Antofagasta, Atacama, Coquimbo)" />
+                <span>Macrozona Norte (Arica, Tarapacá, Antofagasta, Atacama, Coquimbo)</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="macrozona" value="Macrozona Centro (Valparaíso, Metropolitana, O’Higgins, Maule, Ñuble)" />
+                <span>Macrozona Centro (Valparaíso, Metropolitana, O’Higgins, Maule, Ñuble)</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="macrozona" value="Macrozona Sur (Biobío, La Araucanía, Los Ríos, Los Lagos)" />
+                <span>Macrozona Sur (Biobío, La Araucanía, Los Ríos, Los Lagos)</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="macrozona" value="Macrozona Austral (Aysén, Magallanes)" />
+                <span>Macrozona Austral (Aysén, Magallanes)</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="question">
+            <div class="question-label">4. ¿Qué tipo de proyectos ha ejecutado su empresa en los últimos tres años? (Seleccione todas las que correspondan)</div>
+            <div class="options-group">
+              <label class="option">
+                <input type="checkbox" name="tipo_proyectos" value="Vivienda en extensión (casas, condominios horizontales)" />
+                <span>Vivienda en extensión (casas, condominios horizontales)</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="tipo_proyectos" value="Vivienda en altura (edificios habitacionales)" />
+                <span>Vivienda en altura (edificios habitacionales)</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="tipo_proyectos" value="Edificación no habitacional" />
+                <span>Edificación no habitacional</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="tipo_proyectos" value="Infraestructura (obras viales, sanitarias, etc.)" />
+                <span>Infraestructura (obras viales, sanitarias, etc.)</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="tipo_proyectos" value="Industrial o minero" />
+                <span>Industrial o minero</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="tipo_proyectos" value="Otro (especifique)" />
+                <span>Otro (especifique)</span>
+              </label>
+              <input type="text" name="tipo_proyectos_otro" placeholder="Si marcó Otro, especifique">
+            </div>
+          </div>
+
+          <div class="question">
+            <div class="question-label">5. ¿Cuál es su cargo o rol principal dentro de la empresa?</div>
+            <div class="options-group">
+              <label class="option">
+                <input type="radio" name="cargo" value="Gerente General / Socio Director" required />
+                <span>Gerente General / Socio Director</span>
+              </label>
+              <label class="option">
+                <input type="radio" name="cargo" value="Gerente de Operaciones / Producción" />
+                <span>Gerente de Operaciones / Producción</span>
+              </label>
+              <label class="option">
+                <input type="radio" name="cargo" value="Jefe(a) de Innovación, Productividad o BIM" />
+                <span>Jefe(a) de Innovación, Productividad o BIM</span>
+              </label>
+              <label class="option">
+                <input type="radio" name="cargo" value="Encargado(a) de Nuevos Negocios / Desarrollo" />
+                <span>Encargado(a) de Nuevos Negocios / Desarrollo</span>
+              </label>
+              <label class="option">
+                <input type="radio" name="cargo" value="Representante de empresa proveedora MMC" />
+                <span>Representante de empresa proveedora MMC</span>
+              </label>
+              <label class="option">
+                <input type="radio" name="cargo" value="Otro (especifique)" />
+                <span>Otro (especifique)</span>
+              </label>
+              <input type="text" name="cargo_otro" placeholder="Si marcó Otro, especifique">
+            </div>
+          </div>
+
+          <div class="form-nav">
+            <span class="error-global"></span>
+            <button type="button" class="btn btn-secondary" data-prev>Anterior</button>
+            <button type="button" class="btn btn-primary" data-next>Siguiente sección</button>
+          </div>
+        </section>
+
+        <!-- PASO 3: Estrategia y preparación organizacional -->
+        <section class="card step" data-step="3">
+          <div class="card-header">
+            <h2>Sección 3: Estrategia y preparación organizacional para la CI</h2>
+            <p class="card-desc">
+              La industrialización no es solo “usar MMC”, también requiere habilitadores (digitalización, integración temprana, estandarización, relaciones contractuales colaborativas y medición/mejora) que permiten capturar certeza de plazo/costo, calidad y seguridad.
+            </p>
+          </div>
+
+          <div class="question">
+            <div class="question-label">6. ¿Qué tan prioritaria es la implementación de la Construcción Industrializada (CI) como estrategia dentro de su empresa?</div>
+            <div class="options-group">
+              <label class="option">
+                <input type="radio" name="prioridad_ci" value="La CI no es considerada una estrategia en la empresa, y no se promueven iniciativas." required>
+                <span>La CI no es considerada una estrategia en la empresa, y no se promueven iniciativas.</span>
+              </label>
+              <label class="option">
+                <input type="radio" name="prioridad_ci" value="La CI se considera de manera marginal, sin prioridad estratégica.">
+                <span>La CI se considera de manera marginal, sin prioridad estratégica.</span>
+              </label>
+              <label class="option">
+                <input type="radio" name="prioridad_ci" value="La CI es reconocida como opción viable y se promueven pilotos para evaluarla.">
+                <span>La CI es reconocida como opción viable y se promueven pilotos para evaluarla.</span>
+              </label>
+              <label class="option">
+                <input type="radio" name="prioridad_ci" value="La CI es una estrategia importante, con varios proyectos integrados y plan de expansión.">
+                <span>La CI es una estrategia importante, con varios proyectos integrados y plan de expansión.</span>
+              </label>
+              <label class="option">
+                <input type="radio" name="prioridad_ci" value="La CI es una estrategia fundamental, aplicada en todos los proyectos con inversiones en tecnología y formación.">
+                <span>La CI es una estrategia fundamental, aplicada en todos los proyectos con inversiones en tecnología y formación.</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="question">
+            <div class="question-label">7. ¿Su empresa cuenta con una estructura o responsable formal para liderar iniciativas de construcción industrializada?</div>
+            <div class="options-group">
+              <label class="option">
+                <input type="radio" name="estructura_ci" value="Sí, existe un área o cargo definido para este tema" required>
+                <span>Sí, existe un área o cargo definido para este tema</span>
+              </label>
+              <label class="option">
+                <input type="radio" name="estructura_ci" value="Parcialmente, estas funciones se incluyen dentro de otra área">
+                <span>Parcialmente, estas funciones se incluyen dentro de otra área</span>
+              </label>
+              <label class="option">
+                <input type="radio" name="estructura_ci" value="No, solo se han realizado iniciativas o pruebas puntuales">
+                <span>No, solo se han realizado iniciativas o pruebas puntuales</span>
+              </label>
+              <label class="option">
+                <input type="radio" name="estructura_ci" value="No, no se ha ejecutado CI">
+                <span>No, no se ha ejecutado CI</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="question">
+            <div class="question-label">8. ¿Cuál es el nivel de desarrollo actual en los siguientes aspectos de su empresa?</div>
+            <div class="question-help">
+Transformación digital  
+ 1: sin herramientas digitales, gestión manual.  
+ 2: ofimática/dibujo simple, sin integración.  
+ 3: uso de CAD/gestión de proyectos en algunos casos.  
+ 4: uso extendido de BIM, gestión integrada y análisis de datos.  
+ 5: digitalización plena (BIM, IoT, drones, RA/IA) integrada al proceso.  
+Seleccione: ☐ 1 ☐ 2 ☐ 3 ☐ 4 ☐ 5  
+
+Integración temprana de actores/Lean Design  
+ 1: incorporación tardía y secuencial.  
+ 2: coordinación esporádica, no sistemática.  
+ 3: integración temprana en algunos proyectos.  
+ 4: estrategia definida en la mayoría de los proyectos.  
+ 5: práctica estándar en todos los proyectos con equipos colaborativos desde el diseño.  
+Seleccione: ☐ 1 ☐ 2 ☐ 3 ☐ 4 ☐ 5  
+
+Estandarización de procesos y métodos  
+ 1: sin procesos/estándares definidos.  
+ 2: guías aisladas de uso irregular.  
+ 3: estándares aplicados en varios proyectos.  
+ 4: estandarización en la mayoría de los proyectos.  
+ 5: liderazgo en estándares/certificaciones de calidad y sostenibilidad.  
+Seleccione: ☐ 1 ☐ 2 ☐ 3 ☐ 4 ☐ 5  
+
+Relaciones contractuales colaborativas  
+ 1: contratos tradicionales, baja colaboración.  
+ 2: contratos genéricos, mecanismos limitados.  
+ 3: roles y cláusulas claras, gestión reactiva.  
+ 4: contratos con cláusulas colaborativas y resolución proactiva de conflictos.  
+ 5: modelos de alianza/colaborativos con gestión transparente de riesgos.  
+Seleccione: ☐ 1 ☐ 2 ☐ 3 ☐ 4 ☐ 5  
+
+Medición y mejora continua  
+ 1: no se miden resultados.  
+ 2: mediciones ocasionales sin seguimiento.  
+ 3: evaluaciones regulares con uso limitado.  
+ 4: KPIs de productividad/desempeño para mejorar procesos.  
+ 5: mejora continua como cultura, con seguimiento y aprendizaje permanente.  
+Seleccione: ☐ 1 ☐ 2 ☐ 3 ☐ 4 ☐ 5
+            </div>
+
+            <div class="matrix-block">
+              <div class="matrix-row">
+                <div class="matrix-label">Transformación digital</div>
+                <div class="matrix-options">
+                  <label class="option"><input type="radio" name="Transformación digital" value="1" required><span>1</span></label>
+                  <label class="option"><input type="radio" name="Transformación digital" value="2"><span>2</span></label>
+                  <label class="option"><input type="radio" name="Transformación digital" value="3"><span>3</span></label>
+                  <label class="option"><input type="radio" name="Transformación digital" value="4"><span>4</span></label>
+                  <label class="option"><input type="radio" name="Transformación digital" value="5"><span>5</span></label>
+                </div>
+              </div>
+
+              <div class="matrix-row">
+                <div class="matrix-label">Integración temprana de actores/Lean Design</div>
+                <div class="matrix-options">
+                  <label class="option"><input type="radio" name="Integración temprana de actores/Lean Design" value="1" required><span>1</span></label>
+                  <label class="option"><input type="radio" name="Integración temprana de actores/Lean Design" value="2"><span>2</span></label>
+                  <label class="option"><input type="radio" name="Integración temprana de actores/Lean Design" value="3"><span>3</span></label>
+                  <label class="option"><input type="radio" name="Integración temprana de actores/Lean Design" value="4"><span>4</span></label>
+                  <label class="option"><input type="radio" name="Integración temprana de actores/Lean Design" value="5"><span>5</span></label>
+                </div>
+              </div>
+
+              <div class="matrix-row">
+                <div class="matrix-label">Estandarización de procesos y métodos</div>
+                <div class="matrix-options">
+                  <label class="option"><input type="radio" name="Estandarización de procesos y métodos" value="1" required><span>1</span></label>
+                  <label class="option"><input type="radio" name="Estandarización de procesos y métodos" value="2"><span>2</span></label>
+                  <label class="option"><input type="radio" name="Estandarización de procesos y métodos" value="3"><span>3</span></label>
+                  <label class="option"><input type="radio" name="Estandarización de procesos y métodos" value="4"><span>4</span></label>
+                  <label class="option"><input type="radio" name="Estandarización de procesos y métodos" value="5"><span>5</span></label>
+                </div>
+              </div>
+
+              <div class="matrix-row">
+                <div class="matrix-label">Relaciones contractuales colaborativas</div>
+                <div class="matrix-options">
+                  <label class="option"><input type="radio" name="Relaciones contractuales colaborativas" value="1" required><span>1</span></label>
+                  <label class="option"><input type="radio" name="Relaciones contractuales colaborativas" value="2"><span>2</span></label>
+                  <label class="option"><input type="radio" name="Relaciones contractuales colaborativas" value="3"><span>3</span></label>
+                  <label class="option"><input type="radio" name="Relaciones contractuales colaborativas" value="4"><span>4</span></label>
+                  <label class="option"><input type="radio" name="Relaciones contractuales colaborativas" value="5"><span>5</span></label>
+                </div>
+              </div>
+
+              <div class="matrix-row">
+                <div class="matrix-label">Medición y mejora continua</div>
+                <div class="matrix-options">
+                  <label class="option"><input type="radio" name="Medición y mejora continua" value="1" required><span>1</span></label>
+                  <label class="option"><input type="radio" name="Medición y mejora continua" value="2"><span>2</span></label>
+                  <label class="option"><input type="radio" name="Medición y mejora continua" value="3"><span>3</span></label>
+                  <label class="option"><input type="radio" name="Medición y mejora continua" value="4"><span>4</span></label>
+                  <label class="option"><input type="radio" name="Medición y mejora continua" value="5"><span>5</span></label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="question">
+            <div class="question-label">9. ¿Su empresa ha recibido capacitaciones o asistencia técnica en temas de construcción industrializada o Métodos Modernos de Construcción (MMC)?</div>
+            <div class="options-group">
+              <label class="option">
+                <input type="radio" name="capacitaciones_mmc" value="Sí, capacitaciones internas" required>
+                <span>Sí, capacitaciones internas</span>
+              </label>
+              <label class="option">
+                <input type="radio" name="capacitaciones_mmc" value="Sí, capacitaciones o asesorías externas (CDT, universidades, CTEC, proveedores, etc.)">
+                <span>Sí, capacitaciones o asesorías externas (CDT, universidades, CTEC, proveedores, etc.)</span>
+              </label>
+              <label class="option">
+                <input type="radio" name="capacitaciones_mmc" value="No se han realizado capacitaciones al personal, hemos aprendido sobre la marcha.">
+                <span>No se han realizado capacitaciones al personal, hemos aprendido sobre la marcha.</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-nav">
+            <span class="error-global"></span>
+            <button type="button" class="btn btn-secondary" data-prev>Anterior</button>
+            <button type="button" class="btn btn-primary" data-next>Siguiente sección</button>
+          </div>
+        </section>
+
+        <!-- PASO 4: Conocimiento y adopción de MMC -->
+        <section class="card step" data-step="4">
+          <div class="card-header">
+            <h2>Sección 4: Conocimiento y adopción de MMC</h2>
+            <p class="card-desc">
+              Los MMC abarcan categorías como módulos 3D, paneles 2D, componentes 1D, prefabricados no estructurales, componentes aditivos y tecnologías que mejoran procesos en obra. Pueden combinarse y su adopción exige coordinación temprana y diseño orientado a fabricar y ensamblar.
+            </p>
+          </div>
+
+          <div class="question">
+            <div class="question-label">10. ¿Qué nivel de conocimiento existe en su empresa sobre los Métodos Modernos de Construcción (MMC)?</div>
+            <div class="options-group">
+              <label class="option">
+                <input type="radio" name="nivel_conocimiento_mmc" value="No existe conocimiento sobre los MMC." required>
+                <span>No existe conocimiento sobre los MMC.</span>
+              </label>
+              <label class="option">
+                <input type="radio" name="nivel_conocimiento_mmc" value="El conocimiento es limitado a unas pocas personas.">
+                <span>El conocimiento es limitado a unas pocas personas.</span>
+              </label>
+              <label class="option">
+                <input type="radio" name="nivel_conocimiento_mmc" value="Algunos colaboradores conocen los MMC y sus beneficios básicos.">
+                <span>Algunos colaboradores conocen los MMC y sus beneficios básicos.</span>
+              </label>
+              <label class="option">
+                <input type="radio" name="nivel_conocimiento_mmc" value="Se han realizado capacitaciones o discusiones internas sobre MMC.">
+                <span>Se han realizado capacitaciones o discusiones internas sobre MMC.</span>
+              </label>
+              <label class="option">
+                <input type="radio" name="nivel_conocimiento_mmc" value="La mayoría del personal está informada y los MMC son parte de las decisiones estratégicas.">
+                <span>La mayoría del personal está informada y los MMC son parte de las decisiones estratégicas.</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="question">
+            <div class="question-label">11. En el último año, ¿cómo abordó su empresa la posibilidad de incorporar MMC en proyectos?</div>
+            <div class="question-help">(Esta pregunta busca entender la decisión en etapas tempranas: si se evaluó, se planificó y/o se ejecutó.)</div>
+            <div class="options-group">
+              <label class="option">
+                <input type="radio" name="abordaje_mmc" value="Se evaluó y se incorporaron MMC con éxito en uno o más proyectos." required>
+                <span>Se evaluó y se incorporaron MMC con éxito en uno o más proyectos.</span>
+              </label>
+              <label class="option">
+                <input type="radio" name="abordaje_mmc" value="Se evaluó, pero finalmente no se incorporaron MMC.">
+                <span>Se evaluó, pero finalmente no se incorporaron MMC.</span>
+              </label>
+              <label class="option">
+                <input type="radio" name="abordaje_mmc" value="No se incorporaron MMC, pero existe un plan para evaluarlos e implementarlos a corto/mediano plazo.">
+                <span>No se incorporaron MMC, pero existe un plan para evaluarlos e implementarlos a corto/mediano plazo.</span>
+              </label>
+              <label class="option">
+                <input type="radio" name="abordaje_mmc" value="No se incorporaron MMC y no existe plan para evaluarlos o implementarlos.">
+                <span>No se incorporaron MMC y no existe plan para evaluarlos o implementarlos.</span>
+              </label>
+            </div>
+          </div>
+
+          <div id="q11_1" class="question conditional hidden">
+            <div class="question-label">11.1 (Solo si marcó 11a). ¿Cuáles fueron las principales razones para incorporar MMC en etapas tempranas? (Seleccione hasta 3 opciones)</div>
+            <div class="options-group" data-max="3">
+              <label class="option">
+                <input type="checkbox" name="razones_incorporar_mmc" value="Mejor coordinación entre diseño y construcción (menos interferencias/errores)">
+                <span>Mejor coordinación entre diseño y construcción (menos interferencias/errores)</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="razones_incorporar_mmc" value="Reducción de plazos desde el diseño (menor tiempo en obra)">
+                <span>Reducción de plazos desde el diseño (menor tiempo en obra)</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="razones_incorporar_mmc" value="Mayor certeza de costos antes de iniciar obra">
+                <span>Mayor certeza de costos antes de iniciar obra</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="razones_incorporar_mmc" value="Integración temprana con proveedores/fábricas (diseñar para fabricar y ensamblar)">
+                <span>Integración temprana con proveedores/fábricas (diseñar para fabricar y ensamblar)</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="razones_incorporar_mmc" value="Optimización logística y reducción de faenas críticas en obra">
+                <span>Optimización logística y reducción de faenas críticas en obra</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="razones_incorporar_mmc" value="Requisito/lineamiento del mandante o comprador público/privado">
+                <span>Requisito/lineamiento del mandante o comprador público/privado</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="razones_incorporar_mmc" value="Otro (especifique)">
+                <span>Otro (especifique)</span>
+              </label>
+              <input type="text" name="razones_incorporar_mmc_otro" placeholder="Si marcó Otro, especifique">
+            </div>
+          </div>
+
+          <div id="q11_2" class="question conditional hidden">
+            <div class="question-label">11.2 (Si marcó 11b, 11c o 11d). ¿Cuáles fueron las principales razones para no incorporar MMC en etapas tempranas? (Seleccione hasta 3 opciones)</div>
+            <div class="options-group" data-max="3">
+              <label class="option">
+                <input type="checkbox" name="razones_no_incorporar_mmc" value="Falta de información/benchmark de costos, plazos y desempeño">
+                <span>Falta de información/benchmark de costos, plazos y desempeño</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="razones_no_incorporar_mmc" value="Dificultad para integrar diseño y manufactura tempranamente">
+                <span>Dificultad para integrar diseño y manufactura tempranamente</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="razones_no_incorporar_mmc" value="Escasa experiencia interna o capacidades disponibles">
+                <span>Escasa experiencia interna o capacidades disponibles</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="razones_no_incorporar_mmc" value="Ausencia/capacidad insuficiente de proveedores adecuados">
+                <span>Ausencia/capacidad insuficiente de proveedores adecuados</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="razones_no_incorporar_mmc" value="Restricciones contractuales/financieras o de mandantes">
+                <span>Restricciones contractuales/financieras o de mandantes</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="razones_no_incorporar_mmc" value="Riesgo percibido o incertidumbre técnica/regulatoria">
+                <span>Riesgo percibido o incertidumbre técnica/regulatoria</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="razones_no_incorporar_mmc" value="Temor o resistencia al cambio">
+                <span>Temor o resistencia al cambio</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="razones_no_incorporar_mmc" value="Otro (especifique)">
+                <span>Otro (especifique)</span>
+              </label>
+              <input type="text" name="razones_no_incorporar_mmc_otro" placeholder="Si marcó Otro, especifique">
+            </div>
+          </div>
+
+          <div class="question">
+            <div class="question-label">12. ¿Qué tipos de Métodos Modernos de Construcción (MMC) ha utilizado o evaluado su empresa?</div>
+            <div class="question-help">
+Para su respuesta considerar la siguiente información, que permitirá un acercamiento a la realidad de su empresa:
+Nivel de industrialización 
+ • Piloto = prueba experimental en un proyecto.
+ • Parcial = una parte de la partida se resolvió con MMC (mixto).
+ • Total = la partida se resolvió completamente con MMC.
+
+Nivel de experiencia (trayectoria):
+ • Inicial = un piloto aislado.
+ • Básico = varios pilotos de distintas soluciones.
+ • Intermedio = uso en varios proyectos con repetición y resultados medidos.
+ • Avanzado = uso estandarizado, sistemático y medido en múltiples proyectos.
+
+% del presupuesto: estimación del costo MMC sobre el costo total del proyecto (0–25 / 26–50 / 51–75 / >75).
+            </div>
+
+            <table class="table-mmcs">
+              <thead>
+                <tr>
+                  <th>Categoría MMC</th>
+                  <th>Ejemplos</th>
+                  <th>Nivel de industrialización</th>
+                  <th>Nivel de experiencia</th>
+                  <th>% estimado del presupuesto</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>MMC1: Módulos estructurales 3D</td>
+                  <td>Módulos habitacionales, pods</td>
+                  <td>
+                    <select name="MMC1_Nivel de industrialización">
+                      <option value="">Seleccione</option>
+                      <option>Piloto</option>
+                      <option>Parcial</option>
+                      <option>Total</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select name="MMC1_Nivel de experiencia">
+                      <option value="">Seleccione</option>
+                      <option>Inicial</option>
+                      <option>Básico</option>
+                      <option>Intermedio</option>
+                      <option>Avanzado</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select name="MMC1_% estimado del presupuesto">
+                      <option value="">Seleccione</option>
+                      <option>0–25</option>
+                      <option>26–50</option>
+                      <option>51–75</option>
+                      <option>>75</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>MMC2: Componentes estructurales 2D</td>
+                  <td>Paneles, losas, techumbres</td>
+                  <td>
+                    <select name="MMC2_Nivel de industrialización">
+                      <option value="">Seleccione</option>
+                      <option>Piloto</option>
+                      <option>Parcial</option>
+                      <option>Total</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select name="MMC2_Nivel de experiencia">
+                      <option value="">Seleccione</option>
+                      <option>Inicial</option>
+                      <option>Básico</option>
+                      <option>Intermedio</option>
+                      <option>Avanzado</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select name="MMC2_% estimado del presupuesto">
+                      <option value="">Seleccione</option>
+                      <option>0–25</option>
+                      <option>26–50</option>
+                      <option>51–75</option>
+                      <option>>75</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>MMC3: Componentes estructurales 1D</td>
+                  <td>Vigas, marcos, perfiles</td>
+                  <td>
+                    <select name="MMC3_Nivel de industrialización">
+                      <option value="">Seleccione</option>
+                      <option>Piloto</option>
+                      <option>Parcial</option>
+                      <option>Total</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select name="MMC3_Nivel de experiencia">
+                      <option value="">Seleccione</option>
+                      <option>Inicial</option>
+                      <option>Básico</option>
+                      <option>Intermedio</option>
+                      <option>Avanzado</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select name="MMC3_% estimado del presupuesto">
+                      <option value="">Seleccione</option>
+                      <option>0–25</option>
+                      <option>26–50</option>
+                      <option>51–75</option>
+                      <option>>75</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>MMC4: Componentes aditivos</td>
+                  <td>Impresión 3D, manufactura aditiva</td>
+                  <td>
+                    <select name="MMC4_Nivel de industrialización">
+                      <option value="">Seleccione</option>
+                      <option>Piloto</option>
+                      <option>Parcial</option>
+                      <option>Total</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select name="MMC4_Nivel de experiencia">
+                      <option value="">Seleccione</option>
+                      <option>Inicial</option>
+                      <option>Básico</option>
+                      <option>Intermedio</option>
+                      <option>Avanzado</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select name="MMC4_% estimado del presupuesto">
+                      <option value="">Seleccione</option>
+                      <option>0–25</option>
+                      <option>26–50</option>
+                      <option>51–75</option>
+                      <option>>75</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>MMC5: Prefabricados no estructurales</td>
+                  <td>Fachadas, tabiquerías, baños modulares</td>
+                  <td>
+                    <select name="MMC5_Nivel de industrialización">
+                      <option value="">Seleccione</option>
+                      <option>Piloto</option>
+                      <option>Parcial</option>
+                      <option>Total</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select name="MMC5_Nivel de experiencia">
+                      <option value="">Seleccione</option>
+                      <option>Inicial</option>
+                      <option>Básico</option>
+                      <option>Intermedio</option>
+                      <option>Avanzado</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select name="MMC5_% estimado del presupuesto">
+                      <option value="">Seleccione</option>
+                      <option>0–25</option>
+                      <option>26–50</option>
+                      <option>51–75</option>
+                      <option>>75</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>MMC6: Partes o piezas sustitutivas</td>
+                  <td>Moldajes, enfierraduras, mallas, hormigones especiales</td>
+                  <td>
+                    <select name="MMC6_Nivel de industrialización">
+                      <option value="">Seleccione</option>
+                      <option>Piloto</option>
+                      <option>Parcial</option>
+                      <option>Total</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select name="MMC6_Nivel de experiencia">
+                      <option value="">Seleccione</option>
+                      <option>Inicial</option>
+                      <option>Básico</option>
+                      <option>Intermedio</option>
+                      <option>Avanzado</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select name="MMC6_% estimado del presupuesto">
+                      <option value="">Seleccione</option>
+                      <option>0–25</option>
+                      <option>26–50</option>
+                      <option>51–75</option>
+                      <option>>75</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>MMC7: Tecnologías sustitutivas en obra</td>
+                  <td>BIM, drones, IA, RV, exoesqueletos</td>
+                  <td>
+                    <select name="MMC7_Nivel de industrialización">
+                      <option value="">Seleccione</option>
+                      <option>Piloto</option>
+                      <option>Parcial</option>
+                      <option>Total</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select name="MMC7_Nivel de experiencia">
+                      <option value="">Seleccione</option>
+                      <option>Inicial</option>
+                      <option>Básico</option>
+                      <option>Intermedio</option>
+                      <option>Avanzado</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select name="MMC7_% estimado del presupuesto">
+                      <option value="">Seleccione</option>
+                      <option>0–25</option>
+                      <option>26–50</option>
+                      <option>51–75</option>
+                      <option>>75</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Otro (especifique)</td>
+                  <td>
+                    <input type="text" name="Otro (especifique)_Nombre" placeholder="Otro (especifique)">
+                  </td>
+                  <td>
+                    <select name="Otro (especifique)_Nivel de industrialización">
+                      <option value="">Seleccione</option>
+                      <option>Piloto</option>
+                      <option>Parcial</option>
+                      <option>Total</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select name="Otro (especifique)_Nivel de experiencia">
+                      <option value="">Seleccione</option>
+                      <option>Inicial</option>
+                      <option>Básico</option>
+                      <option>Intermedio</option>
+                      <option>Avanzado</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select name="Otro (especifique)_% estimado del presupuesto">
+                      <option value="">Seleccione</option>
+                      <option>0–25</option>
+                      <option>26–50</option>
+                      <option>51–75</option>
+                      <option>>75</option>
+                    </select>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="question-help">
+Ninguno — — —  
+            </div>
+            <div class="options-group">
+              <label class="option">
+                <input type="checkbox" name="Ninguno_MMC" value="Ninguno">
+                <span>Ninguno</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-nav">
+            <span class="error-global"></span>
+            <button type="button" class="btn btn-secondary" data-prev>Anterior</button>
+            <button type="button" class="btn btn-primary" data-next>Siguiente sección</button>
+          </div>
+        </section>
+
+        <!-- PASO 5: Beneficios, barreras y entorno -->
+        <section class="card step" data-step="5">
+          <div class="card-header">
+            <h2>Sección 5: Beneficios, barreras y entorno del ecosistema</h2>
+            <p class="card-desc">
+              Se busca identificar resultados asociados a la industrialización/MMC y condiciones del ecosistema (normativa, oferta, formación, logística, financiamiento, herramientas digitales) que facilitan o frenan la adopción.
+            </p>
+          </div>
+
+          <div class="question">
+            <div class="question-label">13. ¿Cuáles han sido los principales beneficios percibidos o esperados al aplicar construcción industrializada o MMC en sus proyectos? (Seleccione hasta 3 opciones)</div>
+            <div class="options-group" data-max="3">
+              <label class="option">
+                <input type="checkbox" name="beneficios_mmc" value="Mayor certeza en los plazos">
+                <span>Mayor certeza en los plazos</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="beneficios_mmc" value="Mayor calidad y menos retrabajo">
+                <span>Mayor calidad y menos retrabajo</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="beneficios_mmc" value="Menor cantidad de residuos / mayor sostenibilidad">
+                <span>Menor cantidad de residuos / mayor sostenibilidad</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="beneficios_mmc" value="Reducción de la accidentabilidad">
+                <span>Reducción de la accidentabilidad</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="beneficios_mmc" value="Menor incertidumbre en costos">
+                <span>Menor incertidumbre en costos</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="beneficios_mmc" value="Mayor velocidad o aumentos de rendimientos">
+                <span>Mayor velocidad o aumentos de rendimientos</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="beneficios_mmc" value="Menor cantidad de mano de obra">
+                <span>Menor cantidad de mano de obra</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="beneficios_mmc" value="Mejora en imagen e innovación">
+                <span>Mejora en imagen e innovación</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="beneficios_mmc" value="Otro (especifique)">
+                <span>Otro (especifique)</span>
+              </label>
+              <input type="text" name="beneficios_mmc_otro" placeholder="Si marcó Otro, especifique">
+            </div>
+          </div>
+
+          <div class="question">
+            <div class="question-label">14. ¿Cuáles son las principales barreras que han dificultado la adopción de MMC en su empresa? (Seleccione hasta 3 opciones)</div>
+            <div class="options-group" data-max="3">
+              <label class="option">
+                <input type="checkbox" name="barreras_mmc" value="Costos iniciales elevados">
+                <span>Costos iniciales elevados</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="barreras_mmc" value="Falta de normativa o certificación técnica">
+                <span>Falta de normativa o certificación técnica</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="barreras_mmc" value="Escasa oferta de proveedores">
+                <span>Escasa oferta de proveedores</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="barreras_mmc" value="Falta de conocimiento técnico interno">
+                <span>Falta de conocimiento técnico interno</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="barreras_mmc" value="Resistencia cultural o falta de confianza">
+                <span>Resistencia cultural o falta de confianza</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="barreras_mmc" value="Falta de integración temprana entre diseño y manufactura">
+                <span>Falta de integración temprana entre diseño y manufactura</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="barreras_mmc" value="Constructora no logran acordar como repartir riesgos y beneficios asociados al MMC">
+                <span>Constructora no logran acordar como repartir riesgos y beneficios asociados al MMC</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="barreras_mmc" value="No podemos cuantificar los beneficios asociados al uso del MMC">
+                <span>No podemos cuantificar los beneficios asociados al uso del MMC</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="barreras_mmc" value="Otro (especifique)">
+                <span>Otro (especifique)</span>
+              </label>
+              <input type="text" name="barreras_mmc_otro" placeholder="Si marcó Otro, especifique">
+            </div>
+          </div>
+
+          <div class="question">
+            <div class="question-label">15. ¿Qué tan preparado está el ecosistema chileno para escalar la construcción industrializada?</div>
+            <div class="question-help">
+Use las siguientes definiciones para responder cada aspecto con 1 a 5:
+            </div>
+            <ul class="scale-legend">
+              <li><span class="legend-badge level-1">1</span><strong> Muy bajo:</strong> no existe desarrollo o soporte institucional.</li>
+              <li><span class="legend-badge level-2">2</span><strong> Bajo:</strong> iniciativas aisladas sin continuidad ni cobertura nacional.</li>
+              <li><span class="legend-badge level-3">3</span><strong> Medio:</strong> iniciativas en marcha con apoyo parcial y brechas importantes.</li>
+              <li><span class="legend-badge level-4">4</span><strong> Alto:</strong> programas activos, oferta presente y políticas en desarrollo.</li>
+              <li><span class="legend-badge level-5">5</span><strong> Muy alto:</strong> madurez consolidada, regulación vigente, amplia oferta y capacidades disponibles.</li>
+            </ul>
+            <div class="question-help">
+Marque para cada fila: 1 ☐ · 2 ☐ · 3 ☐ · 4 ☐ · 5 ☐
+            </div>
+
+            <div class="matrix-block matrix-ecosistema">
+              <div class="matrix-row">
+                <div class="matrix-label">Normativa y certificación técnica</div>
+                <div class="matrix-options">
+                  <label class="option"><input type="radio" name="Normativa y certificación técnica" value="1" required><span>1</span></label>
+                  <label class="option"><input type="radio" name="Normativa y certificación técnica" value="2"><span>2</span></label>
+                  <label class="option"><input type="radio" name="Normativa y certificación técnica" value="3"><span>3</span></label>
+                  <label class="option"><input type="radio" name="Normativa y certificación técnica" value="4"><span>4</span></label>
+                  <label class="option"><input type="radio" name="Normativa y certificación técnica" value="5"><span>5</span></label>
+                </div>
+              </div>
+              <div class="matrix-row">
+                <div class="matrix-label">Oferta de proveedores y ensayos</div>
+                <div class="matrix-options">
+                  <label class="option"><input type="radio" name="Oferta de proveedores y ensayos" value="1" required><span>1</span></label>
+                  <label class="option"><input type="radio" name="Oferta de proveedores y ensayos" value="2"><span>2</span></label>
+                  <label class="option"><input type="radio" name="Oferta de proveedores y ensayos" value="3"><span>3</span></label>
+                  <label class="option"><input type="radio" name="Oferta de proveedores y ensayos" value="4"><span>4</span></label>
+                  <label class="option"><input type="radio" name="Oferta de proveedores y ensayos" value="5"><span>5</span></label>
+                </div>
+              </div>
+              <div class="matrix-row">
+                <div class="matrix-label">Formación y capacitación técnica</div>
+                <div class="matrix-options">
+                  <label class="option"><input type="radio" name="Formación y capacitación técnica" value="1" required><span>1</span></label>
+                  <label class="option"><input type="radio" name="Formación y capacitación técnica" value="2"><span>2</span></label>
+                  <label class="option"><input type="radio" name="Formación y capacitación técnica" value="3"><span>3</span></label>
+                  <label class="option"><input type="radio" name="Formación y capacitación técnica" value="4"><span>4</span></label>
+                  <label class="option"><input type="radio" name="Formación y capacitación técnica" value="5"><span>5</span></label>
+                </div>
+              </div>
+              <div class="matrix-row">
+                <div class="matrix-label">Incentivos y políticas públicas</div>
+                <div class="matrix-options">
+                  <label class="option"><input type="radio" name="Incentivos y políticas públicas" value="1" required><span>1</span></label>
+                  <label class="option"><input type="radio" name="Incentivos y políticas públicas" value="2"><span>2</span></label>
+                  <label class="option"><input type="radio" name="Incentivos y políticas públicas" value="3"><span>3</span></label>
+                  <label class="option"><input type="radio" name="Incentivos y políticas públicas" value="4"><span>4</span></label>
+                  <label class="option"><input type="radio" name="Incentivos y políticas públicas" value="5"><span>5</span></label>
+                </div>
+              </div>
+              <div class="matrix-row">
+                <div class="matrix-label">Logística y transporte especializado</div>
+                <div class="matrix-options">
+                  <label class="option"><input type="radio" name="Logística y transporte especializado" value="1" required><span>1</span></label>
+                  <label class="option"><input type="radio" name="Logística y transporte especializado" value="2"><span>2</span></label>
+                  <label class="option"><input type="radio" name="Logística y transporte especializado" value="3"><span>3</span></label>
+                  <label class="option"><input type="radio" name="Logística y transporte especializado" value="4"><span>4</span></label>
+                  <label class="option"><input type="radio" name="Logística y transporte especializado" value="5"><span>5</span></label>
+                </div>
+              </div>
+              <div class="matrix-row">
+                <div class="matrix-label">Financiamiento y aseguramiento</div>
+                <div class="matrix-options">
+                  <label class="option"><input type="radio" name="Financiamiento y aseguramiento" value="1" required><span>1</span></label>
+                  <label class="option"><input type="radio" name="Financiamiento y aseguramiento" value="2"><span>2</span></label>
+                  <label class="option"><input type="radio" name="Financiamiento y aseguramiento" value="3"><span>3</span></label>
+                  <label class="option"><input type="radio" name="Financiamiento y aseguramiento" value="4"><span>4</span></label>
+                  <label class="option"><input type="radio" name="Financiamiento y aseguramiento" value="5"><span>5</span></label>
+                </div>
+              </div>
+              <div class="matrix-row">
+                <div class="matrix-label">Herramientas digitales y estándares (BIM / DfMA)</div>
+                <div class="matrix-options">
+                  <label class="option"><input type="radio" name="Herramientas digitales y estándares (BIM / DfMA)" value="1" required><span>1</span></label>
+                  <label class="option"><input type="radio" name="Herramientas digitales y estándares (BIM / DfMA)" value="2"><span>2</span></label>
+                  <label class="option"><input type="radio" name="Herramientas digitales y estándares (BIM / DfMA)" value="3"><span>3</span></label>
+                  <label class="option"><input type="radio" name="Herramientas digitales y estándares (BIM / DfMA)" value="4"><span>4</span></label>
+                  <label class="option"><input type="radio" name="Herramientas digitales y estándares (BIM / DfMA)" value="5"><span>5</span></label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="question">
+            <div class="question-label">16. ¿Qué acciones considera prioritarias para acelerar la adopción de la construcción industrializada en Chile?</div>
+            <div class="options-group" data-max="3">
+              <label class="option">
+                <input type="checkbox" name="acciones_prioritarias" value="Incentivos o subsidios públicos">
+                <span>Incentivos o subsidios públicos</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="acciones_prioritarias" value="Formación técnica y profesional">
+                <span>Formación técnica y profesional</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="acciones_prioritarias" value="Estándares y certificación nacional">
+                <span>Estándares y certificación nacional</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="acciones_prioritarias" value="Proyectos demostrativos o pilotos">
+                <span>Proyectos demostrativos o pilotos</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="acciones_prioritarias" value="Compras públicas que valoren la industrialización">
+                <span>Compras públicas que valoren la industrialización</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="acciones_prioritarias" value="Difusión de casos exitosos">
+                <span>Difusión de casos exitosos</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="acciones_prioritarias" value="Asociar los permisos a un nivel mínimo de constructabilidad">
+                <span>Asociar los permisos a un nivel mínimo de constructabilidad</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="acciones_prioritarias" value="Uso de contratos colaborativos en proyectos públicos">
+                <span>Uso de contratos colaborativos en proyectos públicos</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="acciones_prioritarias" value="Fomentar la integración temprana de los actores">
+                <span>Fomentar la integración temprana de los actores</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="acciones_prioritarias" value="Mayor estandarización de partes y piezas en el mercado, aceptados por los diseñadores">
+                <span>Mayor estandarización de partes y piezas en el mercado, aceptados por los diseñadores</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="acciones_prioritarias" value="Otro (especifique)">
+                <span>Otro (especifique)</span>
+              </label>
+              <input type="text" name="acciones_prioritarias_otro" placeholder="Si marcó Otro, especifique">
+            </div>
+          </div>
+
+          <div class="question">
+            <div class="question-label">17. ¿Qué programas, instituciones o herramientas relacionadas con la construcción industrializada conoce y ha utilizado?</div>
+            <div class="question-help">
+(Por ejemplo: CDT, CCI, CTEC, Plan BIM, CORFO, universidades, MMC VALUE, MAPA MMC, Industrializa etc.)
+            </div>
+            <textarea name="programas_instituciones_herramientas" placeholder="Respuesta abierta"></textarea>
+          </div>
+
+          <div class="form-nav">
+            <span class="error-global"></span>
+            <button type="button" class="btn btn-secondary" data-prev>Anterior</button>
+            <button type="button" class="btn btn-primary" data-next>Siguiente sección</button>
+          </div>
+        </section>
+
+        <!-- PASO 6: Proyección -->
+        <section class="card step" data-step="6">
+          <div class="card-header">
+            <h2>Sección 5: Proyección</h2>
+            <p class="card-desc">
+              Se busca entender la trayectoria esperada de la empresa en industrialización (escala/estandarización) a 3 años.
+            </p>
+          </div>
+
+          <div class="question">
+            <div class="question-label">18. En su opinión, ¿cómo proyecta el nivel de industrialización en su empresa durante los próximos tres años?</div>
+            <div class="options-group">
+              <label class="option">
+                <input type="radio" name="proyeccion_nivel_industrializacion" value="No se prevé un cambio relevante" required>
+                <span>No se prevé un cambio relevante</span>
+              </label>
+              <label class="option">
+                <input type="radio" name="proyeccion_nivel_industrializacion" value="Se espera un aumento moderado (más pilotos o experiencias puntuales)">
+                <span>Se espera un aumento moderado (más pilotos o experiencias puntuales)</span>
+              </label>
+              <label class="option">
+                <input type="radio" name="proyeccion_nivel_industrializacion" value="Se espera un aumento significativo (integración temprana, estandarización de partidas, contratos colaborativos)">
+                <span>Se espera un aumento significativo (integración temprana, estandarización de partidas, contratos colaborativos)</span>
+              </label>
+              <label class="option">
+                <input type="radio" name="proyeccion_nivel_industrializacion" value="Se avanza hacia un modelo industrializado (criterios de modularidad y diseño para fabricar y ensamblar)">
+                <span>Se avanza hacia un modelo industrializado (criterios de modularidad y diseño para fabricar y ensamblar)</span>
+              </label>
+              <label class="option">
+                <input type="radio" name="proyeccion_nivel_industrializacion" value="La empresa busca consolidarse como organización industrializada (procesos planificados, digitalizados y medidos en todas las etapas)">
+                <span>La empresa busca consolidarse como organización industrializada (procesos planificados, digitalizados y medidos en todas las etapas)</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-nav">
+            <span class="error-global"></span>
+            <button type="button" class="btn btn-secondary" data-prev>Anterior</button>
+            <button type="button" class="btn btn-primary" data-next>Siguiente sección</button>
+          </div>
+        </section>
+
+        <!-- PASO 7: Políticas de privacidad -->
+        <section class="card step" data-step="7">
+          <div class="card-header">
+            <h2>Sección final: Políticas de privacidad</h2>
+          </div>
+
+          <div class="question">
+            <div class="question-label">Políticas de privacidad</div>
+            <div class="question-help">
+El responsable del fichero, CDT, recoge estos datos a través de Google Forms para la postulación de participación en esta actividad. Al marcar la casilla de aceptación das tu consentimiento para obtener tus datos. Esta información quedará almacenada en los servidores de Google. Puedes ver su política de privacidad en https://policies.google.com/privacy?hl=es. Tienes derecho a acceder, rectificar, limitar y suprimir los datos en la dirección del responsable indicada en la política de privacidad.
+            </div>
+            <label class="option">
+              <input type="checkbox" name="He leído y acepto la política de privacidad." value="Marcado" required>
+              <span>He leído y acepto la política de privacidad.</span>
+            </label>
+          </div>
+
+          <div class="question">
+            <div class="question-label">Si quiere recibir los resultados del estudio, déjenos su mail:</div>
+            <input type="email" name="mail_resultados" placeholder="correo@empresa.cl (opcional)">
+          </div>
+
+          <div class="form-nav">
+            <span class="error-global" id="finalError"></span>
+            <button type="button" class="btn btn-secondary" data-prev>Anterior</button>
+            <button type="submit" class="btn btn-primary" id="submitBtn">Enviar respuestas</button>
+          </div>
+        </section>
+      </form>
+
+      <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+
+      <!-- PANTALLA DE GRACIAS (solo después de enviar) -->
+      <section id="thankYouScreen" class="card thankyou hidden">
+        <h2>¡Gracias por responder!</h2>
+        <p>
+          Su participación permitirá construir una línea base nacional para orientar estrategias y apoyos del ecosistema hacia una construcción más productiva y sostenible.
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      Encuesta desarrollada en el marco del sondeo nacional sobre Construcción Industrializada (CI) y Métodos Modernos de Construcción (MMC).
+    </footer>
+  </div>
+</body>
+</html>
