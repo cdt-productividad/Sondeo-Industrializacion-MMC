@@ -155,7 +155,7 @@ Estos habilitadores te permiten capturar todo el potencial y el valor de los MMC
                 <span>Inmobiliaria</span>
               </label>
               <label class="option">
-                <input type="radio" name="tipo_empresa" value="Proveedora de soluciones o materiales industrializados" />
+                <input type="radio" name="tipo_empresa" value="Proveedor de soluciones industrializadas" />
                 <span>Proveedora de soluciones o materiales industrializados</span>
               </label>
               <label class="option">
@@ -190,7 +190,7 @@ Estos habilitadores te permiten capturar todo el potencial y el valor de los MMC
           </div>
 
           <div class="question">
-            <div class="question-label">3. ¿En qué macrozonas del país se desarrollan proyectos actualmente? (Seleccione todas las que correspondan)</div>
+            <div class="question-label">3. ¿En qué macrozonas del país se desarrollan sus proyectos actualmente? (Seleccione todas las que correspondan)</div>
             <div class="options-group">
               <label class="option">
                 <input type="checkbox" name="macrozona" value="Macrozona Norte (Arica, Tarapacá, Antofagasta, Atacama, Coquimbo)" />
@@ -212,7 +212,7 @@ Estos habilitadores te permiten capturar todo el potencial y el valor de los MMC
           </div>
 
           <div class="question">
-            <div class="question-label">4. ¿Qué tipo de proyectos ha ejecutado su empresa en los últimos tres años? (Seleccione todas las que correspondan)</div>
+            <div class="question-label">4. ¿Qué tipo de proyectos ha ejecutado o participado su empresa en los últimos 3 años? (Seleccione todas las que correspondan)</div>
             <div class="options-group">
               <label class="option">
                 <input type="checkbox" name="tipo_proyectos" value="Vivienda en extensión (casas, condominios horizontales)" />
@@ -290,7 +290,7 @@ Estos habilitadores te permiten capturar todo el potencial y el valor de los MMC
           </div>
 
           <div class="question">
-            <div class="question-label">6. ¿Qué tan prioritaria es la implementación de la Construcción Industrializada (CI) como estrategia dentro de su empresa?</div>
+            <div class="question-label">6. ¿Qué tan prioritaria es la Construcción Industrializada (CI) como estrategia dentro de su empresa?</div>
             <div class="options-group">
               <label class="option">
                 <input type="radio" name="prioridad_ci" value="La CI no es considerada una estrategia en la empresa, y no se promueven iniciativas." required>
@@ -558,11 +558,15 @@ Estos habilitadores te permiten capturar todo el potencial y el valor de los MMC
                 <input type="radio" name="abordaje_mmc" value="No se incorporaron MMC y no existe plan para evaluarlos o implementarlos.">
                 <span>No se incorporaron MMC y no existe plan para evaluarlos o implementarlos.</span>
               </label>
+              <label class="option">
+                <input type="radio" name="abordaje_mmc" value="No aplica">
+                <span>No aplica</span>
+              </label>
             </div>
           </div>
 
           <div id="q11_1" class="question conditional hidden">
-            <div class="question-label">11.1 (Solo si marcó 11a). ¿Cuáles fueron las principales razones para incorporar MMC en etapas tempranas? (Seleccione hasta 3 opciones)</div>
+            <div class="question-label">11.1 ¿Cuáles fueron las principales razones para incorporar MMC en etapas tempranas? (Seleccione hasta 3 opciones)</div>
             <div class="options-group" data-max="3">
               <label class="option">
                 <input type="checkbox" name="razones_incorporar_mmc" value="Mejor coordinación entre diseño y construcción (menos interferencias/errores)">
@@ -597,7 +601,7 @@ Estos habilitadores te permiten capturar todo el potencial y el valor de los MMC
           </div>
 
           <div id="q11_2" class="question conditional hidden">
-            <div class="question-label">11.2 (Si marcó 11b, 11c o 11d). ¿Cuáles fueron las principales razones para no incorporar MMC en etapas tempranas? (Seleccione hasta 3 opciones)</div>
+            <div class="question-label">11.2 ¿Cuáles fueron las principales razones para no incorporar MMC en etapas tempranas? (Seleccione hasta 3 opciones)</div>
             <div class="options-group" data-max="3">
               <label class="option">
                 <input type="checkbox" name="razones_no_incorporar_mmc" value="Falta de información/benchmark de costos, plazos y desempeño">
@@ -639,6 +643,7 @@ Estos habilitadores te permiten capturar todo el potencial y el valor de los MMC
             <div class="question-label">12. ¿Qué tipos de Métodos Modernos de Construcción (MMC) ha utilizado o evaluado su empresa?</div>
             <div class="question-help">
 Para su respuesta considerar la siguiente información, que permitirá un acercamiento a la realidad de su empresa:
+              
 Nivel de industrialización 
  • Piloto = prueba experimental en un proyecto.
  • Parcial = una parte de la partida se resolvió con MMC (mixto).
@@ -650,7 +655,7 @@ Nivel de experiencia (trayectoria):
  • Intermedio = uso en varios proyectos con repetición y resultados medidos.
  • Avanzado = uso estandarizado, sistemático y medido en múltiples proyectos.
 
-% del presupuesto: estimación del costo MMC sobre el costo total del proyecto (0–25 / 26–50 / 51–75 / >75).
+% del presupuesto: estimación del costo MMC sobre el costo total del proyecto (0-25 / 26-50 / 51-75 / >75).
             </div>
 
             <table class="table-mmcs">
@@ -936,7 +941,7 @@ Ninguno — — —
           </div>
 
           <div class="question">
-            <div class="question-label">13. ¿Cuáles han sido los principales beneficios percibidos o esperados al aplicar construcción industrializada o MMC en sus proyectos? (Seleccione hasta 3 opciones)</div>
+            <div class="question-label">13. ¿Cuáles han sido los principales beneficios percibidos o esperados al aplicar u ofrecer construcción industrializada o MMC en proyectos? (Seleccione hasta 3 opciones)</div>
             <div class="options-group" data-max="3">
               <label class="option">
                 <input type="checkbox" name="beneficios_mmc" value="Mayor certeza en los plazos">
@@ -979,7 +984,7 @@ Ninguno — — —
           </div>
 
           <div class="question">
-            <div class="question-label">14. ¿Cuáles son las principales barreras que han dificultado la adopción de MMC en su empresa? (Seleccione hasta 3 opciones)</div>
+            <div class="question-label">14. ¿Cuáles son las principales barreras que han dificultado la adopción de MMC? (Seleccione hasta 3 opciones)</div>
             <div class="options-group" data-max="3">
               <label class="option">
                 <input type="checkbox" name="barreras_mmc" value="Costos iniciales elevados">
@@ -1195,7 +1200,7 @@ Marque para cada fila: 1 ☐ · 2 ☐ · 3 ☐ · 4 ☐ · 5 ☐
               </label>
               <label class="option">
                 <input type="radio" name="proyeccion_nivel_industrializacion" value="Se espera un aumento moderado (más pilotos o experiencias puntuales)">
-                <span>Se espera un aumento moderado (más pilotos o experiencias puntuales)</span>
+                <span>Se espera un aumento moderado (más pilotos, experiencias puntuales o mayor demanda)</span>
               </label>
               <label class="option">
                 <input type="radio" name="proyeccion_nivel_industrializacion" value="Se espera un aumento significativo (integración temprana, estandarización de partidas, contratos colaborativos)">
@@ -1203,11 +1208,11 @@ Marque para cada fila: 1 ☐ · 2 ☐ · 3 ☐ · 4 ☐ · 5 ☐
               </label>
               <label class="option">
                 <input type="radio" name="proyeccion_nivel_industrializacion" value="Se avanza hacia un modelo industrializado (criterios de modularidad y diseño para fabricar y ensamblar)">
-                <span>Se avanza hacia un modelo industrializado (criterios de modularidad y diseño para fabricar y ensamblar)</span>
+                <span>Se avanza hacia un modelo industrializado (modelo de gestión industrializada)</span>
               </label>
               <label class="option">
                 <input type="radio" name="proyeccion_nivel_industrializacion" value="La empresa busca consolidarse como organización industrializada (procesos planificados, digitalizados y medidos en todas las etapas)">
-                <span>La empresa busca consolidarse como organización industrializada (procesos planificados, digitalizados y medidos en todas las etapas)</span>
+                <span>La empresa busca consolidarse en el sector como organización industrializada (procesos planificados, digitalizados y medidos en todas las etapas)</span>
               </label>
             </div>
           </div>
