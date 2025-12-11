@@ -1,14 +1,22 @@
 :root {
-  --cchc-blue: #003b71;
-  --cchc-blue-light: #1666b5;
-  --cchc-red: #e2231a;
-  --cchc-gold: #f4b000;
+  /* Colores institucionales */
+  --brand-blue: #006EDC;
+  --brand-blue-light: #3B8EF0; /* azul un poco más claro para hovers y detalles */
+  --brand-red: #E74100;
+
+  /* Paleta de apoyo */
   --bg-soft: #f3f5fb;
   --card-bg: #ffffff;
   --border-soft: #dde2ee;
   --text-main: #1f2933;
   --text-muted: #6b7280;
   --error: #b91c1c;
+
+  /* Alias para compatibilidad con nombres anteriores */
+  --cchc-blue: var(--brand-blue);
+  --cchc-blue-light: var(--brand-blue-light);
+  --cchc-red: var(--brand-red);
+  --cchc-gold: #f4b000;
 }
 
 * {
@@ -35,7 +43,7 @@ body {
   border-radius: 24px;
   padding: 28px 22px;
   margin-bottom: 18px;
-  background: linear-gradient(135deg, var(--cchc-blue) 0%, var(--cchc-red) 100%);
+  background: linear-gradient(135deg, var(--brand-blue) 0%, var(--brand-red) 100%);
   color: #fff;
   position: relative;
   overflow: hidden;
@@ -102,7 +110,7 @@ body {
 .progress-title {
   font-size: 0.9rem;
   font-weight: 600;
-  color: var(--cchc-blue);
+  color: var(--brand-blue);
 }
 
 .progress-counter {
@@ -123,7 +131,7 @@ body {
   height: 100%;
   width: 0%;
   border-radius: 999px;
-  background: linear-gradient(90deg, var(--cchc-blue), var(--cchc-gold));
+  background: linear-gradient(90deg, var(--brand-blue), var(--brand-red));
   transition: width 0.3s ease;
 }
 
@@ -148,8 +156,8 @@ body {
 }
 
 .prog-step.active {
-  background: #dde7fb;
-  color: var(--cchc-blue);
+  background: rgba(0, 110, 220, 0.1);
+  color: var(--brand-blue);
   font-weight: 600;
 }
 
@@ -174,7 +182,7 @@ body {
   margin: 0;
   font-size: 1.18rem;
   font-weight: 700;
-  color: var(--cchc-blue);
+  color: var(--brand-blue);
 }
 
 .card-desc {
@@ -190,7 +198,7 @@ body {
   margin-top: 0;
   font-size: 1.3rem;
   font-weight: 700;
-  color: var(--cchc-blue);
+  color: var(--brand-blue);
 }
 
 .welcome-text {
@@ -255,8 +263,8 @@ body {
 }
 
 .option:hover {
-  background: #f3f4ff;
-  box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.12);
+  background: rgba(0, 110, 220, 0.06);
+  box-shadow: 0 0 0 1px rgba(0, 110, 220, 0.12);
 }
 
 input[type="text"],
@@ -276,9 +284,9 @@ input[type="text"]:focus,
 input[type="email"]:focus,
 select:focus,
 textarea:focus {
-  border-color: var(--cchc-blue-light);
+  border-color: var(--brand-blue-light);
   background: #ffffff;
-  box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.18);
+  box-shadow: 0 0 0 1px rgba(0, 110, 220, 0.18);
 }
 
 textarea {
@@ -350,6 +358,7 @@ textarea {
   color: #fff;
 }
 
+/* Mantengo la escala de colores de nivel, no afecta a la imagen institucional principal */
 .level-1 { background: #b91c1c; }
 .level-2 { background: #ea580c; }
 .level-3 { background: #ca8a04; }
@@ -399,15 +408,16 @@ textarea {
   cursor: pointer;
 }
 
+/* Botón principal con azul institucional */
 .btn-primary {
-  background: linear-gradient(135deg, var(--cchc-blue), var(--cchc-blue-light));
+  background: linear-gradient(135deg, var(--brand-blue), var(--brand-blue-light));
   color: #fff;
   box-shadow: 0 10px 22px rgba(15, 23, 42, 0.35);
   font-weight: 500;
 }
 
 .btn-primary:hover {
-  background: linear-gradient(135deg, var(--cchc-blue-light), var(--cchc-blue));
+  background: linear-gradient(135deg, var(--brand-blue-light), var(--brand-blue));
 }
 
 .btn-primary:disabled {
@@ -416,6 +426,7 @@ textarea {
   box-shadow: none;
 }
 
+/* Botón secundario neutro */
 .btn-secondary {
   background: #e5e7f3;
   color: #111827;
