@@ -379,7 +379,7 @@ textarea {
   color: #fff;
 }
 
-/* Mantengo la escala de colores de nivel, no afecta a la imagen institucional principal */
+/* Mantengo la escala de colores */
 .level-1 { background: #b91c1c; }
 .level-2 { background: #ea580c; }
 .level-3 { background: #ca8a04; }
@@ -429,7 +429,7 @@ textarea {
   cursor: pointer;
 }
 
-/* Botón principal con azul institucional */
+/* Botón principal */
 .btn-primary {
   background: linear-gradient(135deg, var(--brand-blue), var(--brand-blue-light));
   color: #fff;
@@ -447,7 +447,7 @@ textarea {
   box-shadow: none;
 }
 
-/* Botón secundario neutro */
+/* Botón secundario */
 .btn-secondary {
   background: #e5e7f3;
   color: #111827;
@@ -517,4 +517,25 @@ footer {
   .logo-img {
     height: 44px;
   }
+}
+
+/* ====================================================== */
+/* 🔵 AJUSTE FINAL PARA ACERCAR LOS RADIOS DE LA PREGUNTA 15 */
+/* ====================================================== */
+
+.matrix-block.matrix-ecosistema .matrix-row {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* reduce separación */
+}
+
+.matrix-block.matrix-ecosistema .matrix-label {
+  flex: 0 0 40%;   /* prueba 35–45% según te guste */
+  text-align: left;
+}
+
+.matrix-block.matrix-ecosistema .matrix-options {
+  display: flex;
+  justify-content: flex-start; /* antes estaba muy a la derecha */
+  gap: 12px;                   /* espacio entre radios */
 }
