@@ -517,25 +517,38 @@ footer {
   .logo-img {
     height: 44px;
   }
+
+  /* 🔹 Pregunta 12: hacer la tabla desplazable en celulares */
+  .table-mmcs {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .table-mmcs th,
+  .table-mmcs td {
+    white-space: nowrap; /* evita quiebres raros de texto en columnas */
+  }
 }
 
 /* ====================================================== */
-/* 🔵 AJUSTE FINAL PARA ACERCAR LOS RADIOS DE LA PREGUNTA 15 */
+/* 🔵 AJUSTE PARA ACERCAR LOS RADIOS DE LA PREGUNTA 15    */
 /* ====================================================== */
 
 .matrix-block.matrix-ecosistema .matrix-row {
   display: flex;
   align-items: center;
-  gap: 12px; /* reduce separación */
+  gap: 12px;
 }
 
 .matrix-block.matrix-ecosistema .matrix-label {
-  flex: 0 0 40%;   /* prueba 35–45% según te guste */
+  flex: 0 0 40%;
   text-align: left;
 }
 
 .matrix-block.matrix-ecosistema .matrix-options {
   display: flex;
-  justify-content: flex-start; /* antes estaba muy a la derecha */
-  gap: 12px;                   /* espacio entre radios */
+  justify-content: flex-start;
+  gap: 12px;
 }
