@@ -25,7 +25,7 @@
     <!-- ENCABEZADO PRINCIPAL -->
     <header class="hero">
       <div class="hero-logos">
-        <!-- AHORA LOS LOGOS SE CARGAN DESDE LA CARPETA /img DEL REPO -->
+        <!-- AHORA LOS LOGOS SE CARGAN DESDE LA RAÍZ DEL REPO -->
         <img src="CDTlogo.png" alt="Logo CDT" class="logo-img" />
         <img src="Logoserena.png" alt="Logo Universidad de La Serena" class="logo-img" />
         <img src="logoCChC.png" alt="Logo CChC" class="logo-img" />
@@ -568,8 +568,8 @@ Estos habilitadores te permiten capturar todo el potencial y el valor de los MMC
                 <span>No se incorporaron MMC y no existe plan para evaluarlos o implementarlos.</span>
               </label>
               <label class="option">
-                <input type="radio" name="abordaje_mmc" value="No aplica">
-                <span>No aplica</span>
+                <input type="radio" name="abordaje_mmc" value="No aplica, somos proveedores de soluciones MMC">
+                <span>No aplica, somos proveedores de soluciones MMC</span>
               </label>
             </div>
           </div>
@@ -648,7 +648,51 @@ Estos habilitadores te permiten capturar todo el potencial y el valor de los MMC
             </div>
           </div>
 
-          <div class="question">
+          <!-- NUEVA 11.3 PARA PROVEEDORES -->
+          <div id="q11_3" class="question conditional hidden">
+            <div class="question-label">11.3 ¿Cuáles han sido las principales barreras como proveedor de soluciones industrializadas para que sus clientes incorporen MMC? (Seleccione hasta 3 opciones)</div>
+            <div class="options-group" data-max="3">
+              <label class="option">
+                <input type="checkbox" name="barreras_proveedor_mmc" value="Falta de conocimiento o confianza de los clientes en las soluciones MMC">
+                <span>Falta de conocimiento o confianza de los clientes en las soluciones MMC</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="barreras_proveedor_mmc" value="Preferencia de mandantes o constructoras por soluciones tradicionales o por el menor costo inicial">
+                <span>Preferencia de mandantes o constructoras por soluciones tradicionales o por el menor costo inicial</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="barreras_proveedor_mmc" value="Procesos de compra o licitación que no consideran criterios de industrialización">
+                <span>Procesos de compra o licitación que no consideran criterios de industrialización</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="barreras_proveedor_mmc" value="Falta de normativa, certificación o validación técnica para nuestras soluciones">
+                <span>Falta de normativa, certificación o validación técnica para nuestras soluciones</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="barreras_proveedor_mmc" value="Dificultad para coordinar diseño, ingeniería y logística con constructoras y proyectistas">
+                <span>Dificultad para coordinar diseño, ingeniería y logística con constructoras y proyectistas</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="barreras_proveedor_mmc" value="Demanda inestable o de bajo volumen que dificulta planificar producción">
+                <span>Demanda inestable o de bajo volumen que dificulta planificar producción</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="barreras_proveedor_mmc" value="Restricciones financieras o de inversión para ampliar capacidad productiva">
+                <span>Restricciones financieras o de inversión para ampliar capacidad productiva</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="barreras_proveedor_mmc" value="Condiciones contractuales que trasladan demasiados riesgos al proveedor">
+                <span>Condiciones contractuales que trasladan demasiados riesgos al proveedor</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="barreras_proveedor_mmc" value="Otro (especifique)">
+                <span>Otro (especifique)</span>
+              </label>
+              <input type="text" name="barreras_proveedor_mmc_otro" placeholder="Si marcó Otro, especifique">
+            </div>
+          </div>
+
+          <div class="question" id="q12_principal">
             <div class="question-label">12. ¿Qué tipos de Métodos Modernos de Construcción (MMC) ha utilizado o evaluado su empresa?</div>
             <div class="question-help">
 Para su respuesta considerar la siguiente información, que permitirá un acercamiento a la realidad de su empresa:
@@ -933,6 +977,49 @@ Ninguno — — —
             </div>
           </div>
 
+          <!-- NUEVA 12b PARA PROVEEDORES (SOLO SE MOSTRARÁ VÍA JS) -->
+          <div id="q12b" class="question conditional hidden">
+            <div class="question-label">12b. ¿Qué tipos de Métodos Modernos de Construcción (MMC) ofrece su empresa actualmente? (Seleccione todas las que correspondan)</div>
+            <div class="question-help">
+Considere las categorías de MMC en función de las soluciones que su empresa diseña, fabrica o comercializa para terceros.
+            </div>
+            <div class="options-group">
+              <label class="option">
+                <input type="checkbox" name="mmc_ofrecidos" value="MMC1 - Módulos estructurales 3D">
+                <span>MMC1: Módulos estructurales 3D (módulos habitacionales, vivienda modular, etc.)</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="mmc_ofrecidos" value="MMC2 - Componentes estructurales 2D">
+                <span>MMC2: Componentes estructurales 2D (muros, losas, techumbres, paneles, etc.)</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="mmc_ofrecidos" value="MMC3 - Componentes estructurales 1D">
+                <span>MMC3: Componentes estructurales 1D (vigas, pilares, escaleras, etc.)</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="mmc_ofrecidos" value="MMC4 - Componentes aditivos">
+                <span>MMC4: Componentes aditivos (impresión 3D, manufactura aditiva, etc.)</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="mmc_ofrecidos" value="MMC5 - Prefabricados no estructurales">
+                <span>MMC5: Prefabricados no estructurales (fachadas, tabiquerías, baños modulares, pods, etc.)</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="mmc_ofrecidos" value="MMC6 - Partes o piezas sustitutivas">
+                <span>MMC6: Partes o piezas sustitutivas (moldajes monolíticos, enfierradura predoblada, hormigones especiales, etc.)</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="mmc_ofrecidos" value="MMC7 - Tecnologías sustitutivas en obra">
+                <span>MMC7: Tecnologías sustitutivas en obra (software, drones, IA, RV, exoesqueletos, etc.)</span>
+              </label>
+              <label class="option">
+                <input type="checkbox" name="mmc_ofrecidos" value="Otro">
+                <span>Otro (especifique)</span>
+              </label>
+              <input type="text" name="mmc_ofrecidos_otro" placeholder="Si marcó Otro, especifique">
+            </div>
+          </div>
+
           <div class="form-nav">
             <span class="error-global"></span>
             <button type="button" class="btn btn-secondary" data-prev>Anterior</button>
@@ -993,7 +1080,7 @@ Ninguno — — —
           </div>
 
           <div class="question">
-            <div class="question-label">14. ¿Cuáles son las principales barreras que han dificultado la adopción de MMC? (Seleccione hasta 3 opciones)</div>
+            <div class="question-label">14. ¿Cuáles son las principales barreras que han dificultado la adopción de MMC en los proyectos en los que participa su empresa (como constructora, desarrolladora o proveedora de soluciones)? (Seleccione hasta 3 opciones)</div>
             <div class="options-group" data-max="3">
               <label class="option">
                 <input type="checkbox" name="barreras_mmc" value="Costos iniciales elevados">
@@ -1200,7 +1287,8 @@ Marque para cada fila: 1 ☐ · 2 ☐ · 3 ☐ · 4 ☐ · 5 ☐
             </p>
           </div>
 
-          <div class="question">
+          <!-- 18 original, para constructoras/inmobiliarias -->
+          <div class="question" id="q18_principal">
             <div class="question-label">18. En su opinión, ¿cómo proyecta el nivel de industrialización en su empresa durante los próximos tres años?</div>
             <div class="options-group">
               <label class="option">
@@ -1222,6 +1310,33 @@ Marque para cada fila: 1 ☐ · 2 ☐ · 3 ☐ · 4 ☐ · 5 ☐
               <label class="option">
                 <input type="radio" name="proyeccion_nivel_industrializacion" value="La empresa busca consolidarse como organización industrializada (procesos planificados, digitalizados y medidos en todas las etapas)">
                 <span>La empresa busca consolidarse en el sector como organización industrializada (procesos planificados, digitalizados y medidos en todas las etapas)</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- 18b especial para proveedores (se mostrará solo vía JS) -->
+          <div class="question conditional hidden" id="q18b_proveedor">
+            <div class="question-label">18b. En su opinión, ¿cómo proyecta el nivel de industrialización en su empresa (como proveedor de soluciones industrializadas o MMC) durante los próximos tres años?</div>
+            <div class="options-group">
+              <label class="option">
+                <input type="radio" name="proyeccion_nivel_industrializacion_proveedor" value="No se prevé un cambio relevante en el nivel de industrialización de la empresa.">
+                <span>No se prevé un cambio relevante en el nivel de industrialización de la empresa.</span>
+              </label>
+              <label class="option">
+                <input type="radio" name="proyeccion_nivel_industrializacion_proveedor" value="Se espera un aumento moderado (mayor uso u oferta de soluciones industrializadas en algunos proyectos o clientes).">
+                <span>Se espera un aumento moderado (mayor uso u oferta de soluciones industrializadas en algunos proyectos o clientes).</span>
+              </label>
+              <label class="option">
+                <input type="radio" name="proyeccion_nivel_industrializacion_proveedor" value="Se espera un aumento significativo (la industrialización será un eje importante en varios proyectos o líneas de negocio).">
+                <span>Se espera un aumento significativo (la industrialización será un eje importante en varios proyectos o líneas de negocio).</span>
+              </label>
+              <label class="option">
+                <input type="radio" name="proyeccion_nivel_industrializacion_proveedor" value="Se avanza hacia un modelo de gestión industrializada (procesos internos, soluciones y proyectos diseñados para fabricar y ensamblar de forma sistemática).">
+                <span>Se avanza hacia un modelo de gestión industrializada (procesos internos, soluciones y proyectos diseñados para fabricar y ensamblar de forma sistemática).</span>
+              </label>
+              <label class="option">
+                <input type="radio" name="proyeccion_nivel_industrializacion_proveedor" value="La empresa busca consolidarse como referente en construcción industrializada o soluciones MMC (procesos planificados, digitalizados y medidos en todas las etapas).">
+                <span>La empresa busca consolidarse como referente en construcción industrializada o soluciones MMC (procesos planificados, digitalizados y medidos en todas las etapas).</span>
               </label>
             </div>
           </div>
@@ -1280,3 +1395,4 @@ El responsable del fichero, CDT, recoge estos datos a través de Google Forms pa
   </div>
 </body>
 </html>
+
