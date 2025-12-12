@@ -20,6 +20,45 @@ document.addEventListener("DOMContentLoaded", () => {
     form.action = SCRIPT_URL;
   }
 
+  // ------------ Utilidades generales ------------
+
+  function getSelectedTipoEmpresa() {
+    const checked = document.querySelector('input[name="tipo_empresa"]:checked');
+    return checked ? checked.value : null;
+  }
+
+  function clearErrors(stepEl) {
+    stepEl.querySelectorAll(".error-msg").forEach(el => el.remove());
+    stepEl.querySelectorAll(".question.error").forEach(q => q.classList.remove("error"));
+    const globalErr = stepEl.querySelector(".error-global");
+    if (globalErr) globalErr.textContent = "";
+  }
+
+  function addError(questionEl, msg) {
+    questionEl.classList.add("error");
+    let err = questionEl.querySelector(".error-msg");
+    if (!err) {
+      err = document.createElement("div");
+      err.className = "error-msg";
+      questionEl.appendChild(err);
+    }
+    err.textContent = msg;
+  }
+
+  function clearInputs(block) {
+    if (!block) return;
+    const fields = block.querySelectorAll("input, select, textarea");
+    fields.forEach(el => {
+      if (el.type === "radio" || el.type === "checkbox") {
+        el.checked = false;
+      } else if (el.tagName.toLowerCase() === "select") {
+        el.selectedIndex = 0;
+      } else {
+        el.value = "";
+      }
+    });
+  }
+
   // ------------ Navegación ------------
 
   function updateUI() {
@@ -71,32 +110,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ------------ Validación ------------
 
-  function clearErrors(stepEl) {
-    stepEl.querySelectorAll(".error-msg").forEach(el => el.remove());
-    stepEl.querySelectorAll(".question.error").forEach(q => q.classList.remove("error"));
-    const globalErr = stepEl.querySelector(".error-global");
-    if (globalErr) globalErr.textContent = "";
-  }
-
-  function addError(questionEl, msg) {
-    questionEl.classList.add("error");
-    let err = questionEl.querySelector(".error-msg");
-    if (!err) {
-      err = document.createElement("div");
-      err.className = "error-msg";
-      questionEl.appendChild(err);
-    }
-    err.textContent = msg;
-  }
-
   function validateStep(stepNumber) {
     const stepEl = steps.find(s => Number(s.dataset.step) === stepNumber);
     if (!stepEl) return true;
 
     clearErrors(stepEl);
     let isValid = true;
+
+    // Solo considerar preguntas visibles (no .hidden) que tengan algún [required]
     const requiredQuestions = Array.from(stepEl.querySelectorAll(".question"))
-      .filter(q => q.querySelector("[required]"));
+      .filter(q => !q.classList.contains("hidden") && q.querySelector("[required]"));
 
     requiredQuestions.forEach(question => {
       const requiredInputs = Array.from(question.querySelectorAll("[required]"));
@@ -125,6 +148,22 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
+    // Regla especial para la pregunta 18b en proveedores
+    if (isValid && stepNumber === 6) {
+      const tipo = getSelectedTipoEmpresa();
+      if (tipo === "Proveedor de soluciones industrializadas") {
+        const q18b = document.getElementById("q18b_proveedor");
+        if (q18b && !q18b.classList.contains("hidden")) {
+          const radios = q18b.querySelectorAll('input[name="proyeccion_nivel_industrializacion_proveedor"]');
+          const anyChecked = Array.from(radios).some(r => r.checked);
+          if (!anyChecked) {
+            isValid = false;
+            addError(q18b, "Debe responder esta pregunta para continuar.");
+          }
+        }
+      }
+    }
+
     if (!isValid) {
       const globalErr = stepEl.querySelector(".error-global");
       if (globalErr) {
@@ -149,9 +188,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Lógica condicional 11.1 / 11.2
+  // ------------ Lógica condicional 11.1 / 11.2 / 11.3 ------------
+
   const q11_1 = document.getElementById("q11_1");
   const q11_2 = document.getElementById("q11_2");
+  const q11_3 = document.getElementById("q11_3");
   const abordajeRadios = document.querySelectorAll('input[name="abordaje_mmc"]');
 
   function resetConditionalBlock(block) {
@@ -161,30 +202,112 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function handleAbordajeChange(value) {
-    // a: muestra 11.1
-    if (value === "Se evaluó y se incorporaron MMC con éxito en uno o más proyectos.") {
-      q11_1.classList.remove("hidden");
-      q11_2.classList.add("hidden");
-      resetConditionalBlock(q11_2);
+    const valIncorpora = "Se evaluó y se incorporaron MMC con éxito en uno o más proyectos.";
+    const valNoIncorpora1 = "Se evaluó, pero finalmente no se incorporaron MMC.";
+    const valNoIncorpora2 = "No se incorporaron MMC, pero existe un plan para evaluarlos e implementarlos a corto/mediano plazo.";
+    const valNoIncorpora3 = "No se incorporaron MMC y no existe plan para evaluarlos o implementarlos.";
+    const valNoAplicaProveedor = "No aplica, somos proveedores de soluciones MMC";
+
+    if (value === valIncorpora) {
+      if (q11_1) q11_1.classList.remove("hidden");
+      if (q11_2) {
+        q11_2.classList.add("hidden");
+        resetConditionalBlock(q11_2);
+      }
+      if (q11_3) {
+        q11_3.classList.add("hidden");
+        resetConditionalBlock(q11_3);
+      }
     } else if (
-      value === "Se evaluó, pero finalmente no se incorporaron MMC." ||
-      value === "No se incorporaron MMC, pero existe un plan para evaluarlos e implementarlos a corto/mediano plazo." ||
-      value === "No se incorporaron MMC y no existe plan para evaluarlos o implementarlos."
+      value === valNoIncorpora1 ||
+      value === valNoIncorpora2 ||
+      value === valNoIncorpora3
     ) {
-      q11_2.classList.remove("hidden");
-      q11_1.classList.add("hidden");
-      resetConditionalBlock(q11_1);
+      if (q11_2) q11_2.classList.remove("hidden");
+      if (q11_1) {
+        q11_1.classList.add("hidden");
+        resetConditionalBlock(q11_1);
+      }
+      if (q11_3) {
+        q11_3.classList.add("hidden");
+        resetConditionalBlock(q11_3);
+      }
+    } else if (value === valNoAplicaProveedor) {
+      if (q11_1) {
+        q11_1.classList.add("hidden");
+        resetConditionalBlock(q11_1);
+      }
+      if (q11_2) {
+        q11_2.classList.add("hidden");
+        resetConditionalBlock(q11_2);
+      }
+      if (q11_3) q11_3.classList.remove("hidden");
     } else {
-      q11_1.classList.add("hidden");
-      q11_2.classList.add("hidden");
-      resetConditionalBlock(q11_1);
-      resetConditionalBlock(q11_2);
+      if (q11_1) {
+        q11_1.classList.add("hidden");
+        resetConditionalBlock(q11_1);
+      }
+      if (q11_2) {
+        q11_2.classList.add("hidden");
+        resetConditionalBlock(q11_2);
+      }
+      if (q11_3) {
+        q11_3.classList.add("hidden");
+        resetConditionalBlock(q11_3);
+      }
     }
   }
 
   abordajeRadios.forEach(r => {
     r.addEventListener("change", e => handleAbordajeChange(e.target.value));
   });
+
+  // ------------ Lógica condicional por tipo de empresa (12 / 12b y 18 / 18b) ------------
+
+  const tipoEmpresaRadios = document.querySelectorAll('input[name="tipo_empresa"]');
+  const q12Principal = document.getElementById("q12_principal");
+  const q12b = document.getElementById("q12b");
+  const q18Principal = document.getElementById("q18_principal");
+  const q18bProveedor = document.getElementById("q18b_proveedor");
+
+  function applyTipoEmpresaMode(tipoValue) {
+    const isProveedor = tipoValue === "Proveedor de soluciones industrializadas";
+
+    // 12 vs 12b
+    if (q12Principal && q12b) {
+      if (isProveedor) {
+        q12Principal.classList.add("hidden");
+        clearInputs(q12Principal);
+        q12b.classList.remove("hidden");
+      } else {
+        q12Principal.classList.remove("hidden");
+        q12b.classList.add("hidden");
+        clearInputs(q12b);
+      }
+    }
+
+    // 18 vs 18b
+    if (q18Principal && q18bProveedor) {
+      if (isProveedor) {
+        q18Principal.classList.add("hidden");
+        clearInputs(q18Principal);
+        q18bProveedor.classList.remove("hidden");
+      } else {
+        q18Principal.classList.remove("hidden");
+        q18bProveedor.classList.add("hidden");
+        clearInputs(q18bProveedor);
+      }
+    }
+  }
+
+  tipoEmpresaRadios.forEach(radio => {
+    radio.addEventListener("change", e => {
+      applyTipoEmpresaMode(e.target.value);
+    });
+  });
+
+  // Aplicar modo inicial por si ya se escogió el tipo antes de llegar a secciones 4 o 6
+  applyTipoEmpresaMode(getSelectedTipoEmpresa());
 
   // ------------ Eventos de navegación ------------
 
