@@ -532,7 +532,6 @@
               <label class="radio-pill"><input type="radio" name="p12_mmc1_proy" value="11+" onchange="this.closest('.radio-pills').querySelectorAll('.radio-pill').forEach(p=>p.classList.remove('selected')); this.closest('.radio-pill').classList.add('selected')"> +10</label>
             </div>
           </div></div>
-        </div>
         <div class="condicional" id="mmc2_detail">
           <div class="condicional-titulo">MMC2 — Paneles Estructurales 2D — Detalle de uso</div>
           <div class="pregunta" style="margin-bottom:16px;">
@@ -573,7 +572,6 @@
               <label class="radio-pill"><input type="radio" name="p12_mmc2_proy" value="11+" onchange="this.closest('.radio-pills').querySelectorAll('.radio-pill').forEach(p=>p.classList.remove('selected')); this.closest('.radio-pill').classList.add('selected')"> +10</label>
             </div>
           </div></div>
-        </div>
         <div class="condicional" id="mmc3_detail">
           <div class="condicional-titulo">MMC3 — Componentes Estructurales 1D — Detalle de uso</div>
           <div class="pregunta" style="margin-bottom:16px;">
@@ -615,7 +613,6 @@
               <label class="radio-pill"><input type="radio" name="p12_mmc3_proy" value="11+" onchange="this.closest('.radio-pills').querySelectorAll('.radio-pill').forEach(p=>p.classList.remove('selected')); this.closest('.radio-pill').classList.add('selected')"> +10</label>
             </div>
           </div></div>
-        </div>
         <div class="condicional" id="mmc4_detail">
           <div class="condicional-titulo">MMC4 — Componentes de Construcción Aditiva — Detalle de uso</div>
           <div class="pregunta" style="margin-bottom:16px;">
@@ -656,7 +653,6 @@
               <label class="radio-pill"><input type="radio" name="p12_mmc4_proy" value="11+" onchange="this.closest('.radio-pills').querySelectorAll('.radio-pill').forEach(p=>p.classList.remove('selected')); this.closest('.radio-pill').classList.add('selected')"> +10</label>
             </div>
           </div></div>
-        </div>
         <div class="condicional" id="mmc5_detail">
           <div class="condicional-titulo">MMC5 — Prefabricados No Estructurales — Detalle de uso</div>
           <div class="pregunta" style="margin-bottom:16px;">
@@ -699,7 +695,6 @@
               <label class="radio-pill"><input type="radio" name="p12_mmc5_proy" value="11+" onchange="this.closest('.radio-pills').querySelectorAll('.radio-pill').forEach(p=>p.classList.remove('selected')); this.closest('.radio-pill').classList.add('selected')"> +10</label>
             </div>
           </div></div>
-        </div>
         <div class="condicional" id="mmc6_detail">
           <div class="condicional-titulo">MMC6 — Partes y Piezas Sustitutivas — Detalle de uso</div>
           <div class="pregunta" style="margin-bottom:16px;">
@@ -742,7 +737,6 @@
               <label class="radio-pill"><input type="radio" name="p12_mmc6_proy" value="11+" onchange="this.closest('.radio-pills').querySelectorAll('.radio-pill').forEach(p=>p.classList.remove('selected')); this.closest('.radio-pill').classList.add('selected')"> +10</label>
             </div>
           </div></div>
-        </div>
         <div class="condicional" id="mmc7_detail">
           <div class="condicional-titulo">MMC7 — Tecnologías Sustitutivas en Sitio — Detalle de uso</div>
           <div class="pregunta" style="margin-bottom:16px;">
@@ -785,7 +779,6 @@
               <label class="radio-pill"><input type="radio" name="p12_mmc7_proy" value="11+" onchange="this.closest('.radio-pills').querySelectorAll('.radio-pill').forEach(p=>p.classList.remove('selected')); this.closest('.radio-pill').classList.add('selected')"> +10</label>
             </div>
           </div></div>
-        </div>
 
         <hr class="divider">
 
@@ -795,11 +788,13 @@
             <span class="badge-iuci">IUCI</span>
           </div>
           <div class="pregunta-nota">Incluya todos los proyectos, con o sin MMC, para calcular la tasa de adopción.</div>
-          <div class="opciones-radio">
-            <label class="opcion-radio"><input type="radio" name="p12e_n_total" value="1-5"> 1–5 proyectos</label>
-            <label class="opcion-radio"><input type="radio" name="p12e_n_total" value="6-15"> 6–15 proyectos</label>
-            <label class="opcion-radio"><input type="radio" name="p12e_n_total" value="16-30"> 16–30 proyectos</label>
-            <label class="opcion-radio"><input type="radio" name="p12e_n_total" value="31+"> Más de 30 proyectos</label>
+          <div class="seccion-iuci" style="margin-top:12px;">
+            <div class="radio-pills">
+              <label class="radio-pill"><input type="radio" name="p12e_n_total" value="1-5" onchange="this.closest('.radio-pills').querySelectorAll('.radio-pill').forEach(p=>p.classList.remove('selected')); this.closest('.radio-pill').classList.add('selected')"> 1–5 proyectos</label>
+              <label class="radio-pill"><input type="radio" name="p12e_n_total" value="6-15" onchange="this.closest('.radio-pills').querySelectorAll('.radio-pill').forEach(p=>p.classList.remove('selected')); this.closest('.radio-pill').classList.add('selected')"> 6–15 proyectos</label>
+              <label class="radio-pill"><input type="radio" name="p12e_n_total" value="16-30" onchange="this.closest('.radio-pills').querySelectorAll('.radio-pill').forEach(p=>p.classList.remove('selected')); this.closest('.radio-pill').classList.add('selected')"> 16–30 proyectos</label>
+              <label class="radio-pill"><input type="radio" name="p12e_n_total" value="31+" onchange="this.closest('.radio-pills').querySelectorAll('.radio-pill').forEach(p=>p.classList.remove('selected')); this.closest('.radio-pill').classList.add('selected')"> Más de 30 proyectos</label>
+            </div>
           </div>
         </div>
 
@@ -1198,3 +1193,4 @@ actualizarProgreso();
     console.warn('Power Automate no configurado o error de red:', err.message);
     // Continuar igual — mostrar confirmación aunque falle el envío
   }
+  
