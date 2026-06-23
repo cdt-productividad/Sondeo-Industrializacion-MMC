@@ -785,8 +785,11 @@ function actualizarProgreso() {
 }
 
 // ── Enviar ───────────────────────────────────────────────────
-function enviarFormulario() {
-  // Recopilar todas las respuestas
+// ── CONFIGURACIÓN: pegar aquí la URL de Power Automate ──────
+const POWER_AUTOMATE_URL = 'PEGAR_URL_DEL_FLUJO_POWER_AUTOMATE_AQUI';
+
+async function enviarFormulario() {
+  // ── 1. Recopilar todas las respuestas ─────────────────────
   const respuestas = {};
   document.querySelectorAll('input, select, textarea').forEach(el => {
     if (!el.name) return;
@@ -798,6 +801,13 @@ function enviarFormulario() {
       respuestas[el.name] = el.value;
     }
   });
+  // Convertir arrays a strings separados por coma para Excel
+  Object.keys(respuestas).forEach(k => {
+    if (Array.isArray(respuestas[k])) respuestas[k] = respuestas[k].join(', ');
+  });
+  // Agregar metadatos
+  respuestas['timestamp'] = new Date().toISOString();
+  respuestas['user_agent'] = navigator.userAgent.substring(0, 100);
 
   // Calcular IMOC proxy
   const p6 = parseInt(respuestas.p6 || 0);
@@ -820,7 +830,23 @@ function enviarFormulario() {
     imoc <= 60 ? 'Programa informal (Nivel 3)' :
     imoc <= 80 ? 'Programa formal (Nivel 4)' : 'Consolidado (Nivel 5)';
 
-  // Mostrar confirmación
+  // ── 3. Enviar a Power Automate → Excel SharePoint ─────────
+  const btns = document.querySelectorAll('.btn-primary');
+  btns.forEach(b => { b.disabled = true; b.textContent = 'Enviando...'; });
+
+  try {
+    if (POWER_AUTOMATE_URL !== 'PEGAR_URL_DEL_FLUJO_POWER_AUTOMATE_AQUI') {
+      await fetch(POWER_AUTOMATE_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(respuestas)
+      });
+    }
+  } catch (err) {
+    console.warn('Error al enviar a Power Automate:', err.message);
+  }
+
+  // ── 4. Mostrar pantalla de confirmación ───────────────────
   document.querySelector('.encuesta').innerHTML = `
     <div style="text-align:center;padding:60px 20px;">
       <div style="font-size:60px;margin-bottom:20px;">✅</div>
@@ -831,13 +857,13 @@ function enviarFormulario() {
       </p>
       <div style="background:var(--azul-pale);border-radius:12px;padding:28px 32px;max-width:440px;margin:0 auto;">
         <div style="font-size:13px;font-weight:700;color:var(--azul);margin-bottom:16px;">Su resultado IMOC (preliminar)</div>
-        <div style="font-size:52px;font-weight:700;color:var(--purpura);margin-bottom:4px;">${imoc.toFixed(1)}</div>
+        <div style="font-size:52px;font-weight:700;color:var(--purpura);margin-bottom:4px;">\${imoc.toFixed(1)}</div>
         <div style="font-size:13px;color:var(--gris-muted);margin-bottom:20px;">/ 100 puntos</div>
         <div style="background:var(--purpura);color:white;padding:8px 20px;border-radius:20px;font-size:13px;font-weight:700;display:inline-block;">
-          ${nivelIMOC}
+          \${nivelIMOC}
         </div>
         <div style="margin-top:20px;font-size:11px;color:var(--gris-muted);">
-          Estrategia: ${dim_estrategia.toFixed(0)} · Habilitantes: ${dim_habilitantes.toFixed(0)} · Ecosistema: ${dim_ecosistema.toFixed(0)}
+          Estrategia: \${dim_estrategia.toFixed(0)} &middot; Habilitantes: \${dim_habilitantes.toFixed(0)} &middot; Ecosistema: \${dim_ecosistema.toFixed(0)}
         </div>
       </div>
       <p style="margin-top:32px;font-size:12px;color:var(--gris-muted);">
@@ -855,4 +881,20 @@ function enviarFormulario() {
 actualizarProgreso();
 </script>
 </body>
-</html>
+</html>  // ── 3. Enviar a Power Automate → Excel SharePoint ─────────
+  const btnEnviar = document.querySelectorAll('.btn-primary');
+  btnEnviar.forEach(b => { b.disabled = true; b.textContent = 'Enviando...'; });
+
+  try {
+    const response = await fetch(POWER_AUTOMATE_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(respuestas)
+    });
+    if (!response.ok) throw new Error('Error en el servidor');
+  } catch (err) {
+    console.warn('Power Automate no configurado o error de red:', err.message);
+    // Continuar igual — mostrar confirmación aunque falle el envío
+  }
+
+  // ── 4. Mostrar confirmación ────────────────────────────────
