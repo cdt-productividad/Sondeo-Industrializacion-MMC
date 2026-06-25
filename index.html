@@ -1088,7 +1088,7 @@ function actualizarProgreso() {
   document.getElementById('progress-label').textContent = `Completado ${pct}% — Sondeo Nacional CI/MMC Chile 2026`;
 }
 
-const POWER_AUTOMATE_URL = 'https://script.google.com/macros/s/AKfycbzqZt7Xh8z5sLLpN2Q41OdAhSlL85v-V0OYcICose1fE019yP7S0AVF7FfddkcZHdpN/exec';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzqZt7Xh8z5sLLpN2Q41OdAhSlL85v-V0OYcICose1fE019yP7S0AVF7FfddkcZHdpN/exec';
 
 async function enviarFormulario() {
   const respuestas = {};
@@ -1134,15 +1134,18 @@ async function enviarFormulario() {
   btns.forEach(b => { b.disabled = true; b.textContent = 'Enviando...'; });
 
   try {
-    if (POWER_AUTOMATE_URL !== 'PEGAR_URL_DEL_FLUJO_POWER_AUTOMATE_AQUI') {
-      await fetch(POWER_AUTOMATE_URL, {
+    if (APPS_SCRIPT_URL && APPS_SCRIPT_URL !== 'PEGAR_URL_DE_TU_WEB_APP_DE_APPS_SCRIPT_AQUI') {
+      await fetch(APPS_SCRIPT_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify(respuestas)
       });
+    } else {
+      throw new Error('Falta configurar APPS_SCRIPT_URL');
     }
   } catch (err) {
-    console.warn('Error al enviar a Power Automate:', err.message);
+    console.warn('Error al enviar a Apps Script:', err.message);
   }
   document.querySelector('.encuesta').innerHTML = `
     <div style="text-align:center;padding:60px 20px;">
@@ -1179,18 +1182,3 @@ actualizarProgreso();
 </script>
 </body>
 </html>
-  const btnEnviar = document.querySelectorAll('.btn-primary');
-  btnEnviar.forEach(b => { b.disabled = true; b.textContent = 'Enviando...'; });
-
-  try {
-    const response = await fetch(POWER_AUTOMATE_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(respuestas)
-    });
-    if (!response.ok) throw new Error('Error en el servidor');
-  } catch (err) {
-    console.warn('Power Automate no configurado o error de red:', err.message);
-    // Continuar igual — mostrar confirmación aunque falle el envío
-  }
-  
